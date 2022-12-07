@@ -18,10 +18,13 @@ int main()
     //Data Structure set up for Adjacency List
     map<string, vector<string>> graph;
     map<string, vector<string>>::iterator it;
+    //Map object 
     Map map1; 
-	
+    // Choice1 variable is used to figure out which data structure the user wants to use
     string choice1; 
+    // Used to check that the user inputed a correct input
     bool rightInput = false;
+    //Vectors are used to store the info inquired about in the program run
     vector <string> artistInquiredAbout; 
     vector<string> albumsLookedAt;
     vector<string> genresLookedAt; 
@@ -32,7 +35,7 @@ int main()
     
 
 
-
+    //Content contains all of the row vectors 
     vector<vector<string>> content;
     vector<string> row;
     string line, word;
@@ -108,11 +111,12 @@ int main()
     while (choice != 0) {
 
 
-
+	//Function to search for a particular album and printing information on it
         if (choice == 1) {
 
 
             if (choice1 == "AdjacencyList") {
+		//Used to start the timer of how long it takes for the task to be completed
                 auto start = high_resolution_clock::now();
                 string albumChoice;
                 bool check = false;
@@ -135,10 +139,11 @@ int main()
                         }
                     }
                 }
+		//If album could not be found 
                 if (check == false) {
                     cout << "Sorry we could not find that album " << endl;
                 }
-
+		//Used to end the timer of how long it takes for the task to be completed and complete the calculation
                 auto stop = high_resolution_clock::now();
                 auto duration = duration_cast<microseconds>(stop - start);
 
@@ -158,13 +163,14 @@ int main()
             }
 
         }
-
+	//Function to search for a particular artist and printing information on it
         else if (choice == 2) {
 
             if (choice1 == "AdjacencyList") {
                 auto start = high_resolution_clock::now();
                 string choice2;
                 bool check = false;
+		//Check system is utilized in order to print all of the auxiliary information
                 int rankCheck = 0;
                 int TitleCheck = 0;
                 int releaseDateCheck = 0;
@@ -280,7 +286,7 @@ int main()
         }
 
 
-
+	//Function to search for a particular year and finding the critically acclaimed albums in it printing information on it
         else if (choice == 3) {
             if (choice1 == "AdjacencyList") {
                 bool check = false;
@@ -464,6 +470,7 @@ int main()
 
         cin >> choice;
     }
+	//Print out info of what was searched by the user at the end of the program run. 
     if (artistInquiredAbout.size() > 0 || albumsLookedAt.size() > 0 || genresLookedAt.size() > 0) {
         cout << "Thank you for using our app before you leave here is some info about your latest searches" << endl;
         if (artistInquiredAbout.size() > 0) {
