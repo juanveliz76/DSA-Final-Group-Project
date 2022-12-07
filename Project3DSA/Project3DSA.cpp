@@ -60,6 +60,7 @@ int main()
 
         if (choice1 == "AdjacencyList") {
             rightInput = true;
+	    // Insert into the adjacency lists
             for (int i = 0;i < content.size();i++)
             {
                 for (int j = 0;j < content[i].size();j++)
@@ -70,6 +71,7 @@ int main()
         }
         else if (choice1 == "Map") {
             rightInput = true;
+	    //insert into map
             for (int i = 0;i < content.size();i++)
             {
                 for (int j = 0;j < content[i].size();j++)
