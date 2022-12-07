@@ -242,7 +242,7 @@ void Map::choice3Helper(Node* head, string year)
         choice3Helper(head->right, year);
     }
 }
-/Searches fan acclaimed albums in a given year
+//Searches fan acclaimed albums in a given year
 void Map::choice4Helper(Node* head, string year)
 {
     string rating = "0.0";
