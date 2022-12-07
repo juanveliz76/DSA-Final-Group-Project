@@ -1,6 +1,7 @@
 #include "Map.h"
 #include <iostream>
 
+//Creates space for each node
 Node* Map::nodeSetUp(string first1, vector<string> second)
 {
     Node* node = new Node();
@@ -13,14 +14,16 @@ Node* Map::nodeSetUp(string first1, vector<string> second)
 
 }
 
-
+//Insert function
 Node* Map::insertFnct(Node* node, string &first, vector<string> &second)
 {
     if (node == nullptr) {
         count++;
         return nodeSetUp(first, second);
     }
+        //Albums are compared alphabetically 
         int comparison = first.compare(node->first);
+        //Maps do not allow duplicate keys
         if (comparison == 0) {
             return node;
         }
@@ -30,9 +33,9 @@ Node* Map::insertFnct(Node* node, string &first, vector<string> &second)
         else if (comparison > 0) {
             node->right = insertFnct(node->right, first, second);
         }
-        
+        //Update height 
         node->depth = 1 + getMax(getHeight(node->left), getHeight(node->right));
-
+        //Perform each necessary rotation
         if (getBalanceFactorHelper(node) > 1) {
             int comparison1 = first.compare(node->left->first);
             if (comparison1 < 0) {
@@ -56,11 +59,11 @@ Node* Map::insertFnct(Node* node, string &first, vector<string> &second)
 
         return node;
 }
-
+//Public Insert Function
 void Map::insert1(string first, vector<string> second) {
     root = insertFnct(root, first,second);
 }
-
+//returns height
 int Map::getHeight(Node* node) {
 
     if (node == nullptr) {
@@ -71,13 +74,13 @@ int Map::getHeight(Node* node) {
         return node->depth;
     }
 }
-
+//Returns balance factor
 int Map::getBalanceFactorHelper(Node*& node){
     int balanceFactor = (getHeight(node->left) - getHeight(node->right));
     return balanceFactor;
 }
 
-
+//Returns if tree is left-heavy or right-heavy
 int Map::getMax(int leftHeight, int rightHeight)
 {
     if (leftHeight > rightHeight) {
@@ -149,7 +152,7 @@ vector<string>& Map::operator[](string first)
     Node* temp = insertFnct(root, first,root->second);
     return temp->second;
 }
-
+//In order traversal, and checks for a particular album name
 void Map::choice1Helper(Node* head, string albumName)
 {
     
@@ -177,7 +180,7 @@ void Map::choice1Helper(Node* head, string albumName)
         choice1Helper(head->right, albumName);
     }
 }
-
+//Checks for a particular artists and returns the necessary info
 void Map::choice2Helper(Node* head, string artistName)
 {
     if (head == nullptr) {
@@ -204,7 +207,7 @@ void Map::choice2Helper(Node* head, string artistName)
         choice2Helper(head->right, artistName);
     }
 }
-
+//Searches critically acclaimed albums in a given year
 void Map::choice3Helper(Node* head, string year)
 {
     string rating = "0";
@@ -239,7 +242,7 @@ void Map::choice3Helper(Node* head, string year)
         choice3Helper(head->right, year);
     }
 }
-
+/Searches fan acclaimed albums in a given year
 void Map::choice4Helper(Node* head, string year)
 {
     string rating = "0.0";
@@ -276,7 +279,7 @@ void Map::choice4Helper(Node* head, string year)
         choice4Helper(head->right, year);
     }
 }
-
+//Searches for a genre and gives us the critically acclaimed ones from that genre
 void Map::choice5Helper(Node* head, string genre)
 {
     string rating = "0.0";
@@ -314,7 +317,7 @@ void Map::choice5Helper(Node* head, string genre)
         choice5Helper(head->right, genre);
     }
 }
-
+//Was originally utilized to see that the insertion function was working correctly 
 void Map::iterate(Node* head)
 {
     
@@ -331,6 +334,7 @@ void Map::iterate(Node* head)
         iterate(head->right);
     }
 }
+//Public choice1 fnct 
 void Map::choice1(string albumName)
 {
     choice1Helper(root, albumName);
@@ -341,6 +345,7 @@ void Map::choice1(string albumName)
         cout << "Sorry, we could not find that album" << endl;
     }
 }
+//Public choice2 fnct 
 void Map::choice2(string artistName)
 {
     choice2Helper(root, artistName);
@@ -351,6 +356,7 @@ void Map::choice2(string artistName)
         cout << "Sorry, we could not find that artist" << endl;
     }
 }
+//Public choice3 fnct 
 void Map::choice3(string year)
 {
     choice3Helper(root, year);
@@ -361,6 +367,7 @@ void Map::choice3(string year)
         cout << "Sorry, we could not find data on that year please try 1999-2021" << endl;
     }
 }
+//Public choice4 fnct 
 void Map::choice4(string year)
 {
     choice4Helper(root, year);
@@ -371,6 +378,7 @@ void Map::choice4(string year)
         cout << "Sorry, we could not find data on that year please try 1999-2021" << endl;
     }
 }
+//Public choice5 fnct 
 void Map::choice5(string genre)
 {
     choice5Helper(root, genre);
